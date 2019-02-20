@@ -1,0 +1,154 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{color}
+\usepackage{amsmath,amssymb}
+\renewcommand{\ij}{_{i,j}}
+\newcommand{\ijj}{_{i,j-1}}
+\newcommand{\ijk}{_{i,j-2}}
+\newcommand{\ijjj}{_{i,j-2}}
+\newcommand{\magn}[1]{\left\vert #1 \right\vert }
+\renewcommand{\part}[2]{\frac{\partial #1 }{\partial #2}}
+\newcommand{\partbig}[2]{\frac{\partial }{\partial #2}\left( #1 \right)}
+\newcommand{\harp}{\overset{\rightharpoonup}}
+\newcommand{\harpoon}{\overset{\rightharpoonup}}
+\newcommand{\ten}[1]{\underline{\underline{#1}}}
+\newcommand{\rij}{\harp r \ij}
+\newcommand{\rijj}{\harp r \ijj}
+\newcommand{\rijjj}{\harp r \ijjj}
+\newcommand{\rijk}{\harp r \ijk}
+
+
+\begin{document}
+\begin{center}
+  \textbf{Persistence length interactions and force Derviation.}\\
+  \textsc{Christian Tabedzki}
+\end{center} 
+
+
+
+For this report, we derive the forces for each particle involved on the polymer backbone to.
+
+\section{Energies}
+
+The energy is defined as 
+
+\begin{equation}
+  \label{eqn:Energy_polymer}
+  \beta E_{\text{poly}}  =  \frac{l_p}{2} \sum_{i=1}^{n_p} \int_0^L ds \left(\part{\harp u_i}{s}\right)^2
+\end{equation}
+which when discretized becomes
+\begin{equation}
+  \label{eqn:Energy_polymer_discrete}
+  \beta E_{\text{poly}}  =  \sum_{i=1}^{n_P}  \sum_{j=2}^{N} \left[
+  \frac{\varepsilon_b}{2 l_0}  \magn{ \harp u \ij - \harp u \ijj - \eta \harp R\ij ^\bot} ^2 +
+   \frac{\varepsilon_{\vert \vert}}{2 l_0} 
+   \left( \harp R\ij \cdot \harp u \ijj - l_0 \gamma \right)^2 +
+   \frac{\varepsilon _\perp}
+   {2l_0} \magn{\harp R\ijj ^\perp}^2
+  \right]
+\end{equation}
+where 
+\[
+\harp  R\ij  ^\bot = \harp R \ij - \left(\harp R \ij \cdot \harp u \ijj \right) \harp u \ijj 
+\]
+which represents the component of \(\harp R \ij\) vector perpendicular to \(\harp u \ijj \).
+\(\harp u \ijj \) is defined as  
+  \[\harp u_{i,j-1} = 
+  \part{\harp{r}_i(s)}{s} = 
+    \frac{\left( \harp r\ij-\harp r\ijk \right)}{\magn{\harp r\ij - \harp r\ijk}} \]
+which means the orietation of \(\harp u_{i,j-1}\) is independent of the position of \(\harp r\ijj\), where 
+\[\harp R \ij = \harp r \ij - \harp r \ijj \]
+
+Additionally, The energnetic coefficients of bending $\varepsilon_b$,
+compression $\varepsilon_{\vert \vert}$, and shearing $\varepsilon_\perp$, as
+well as $\eta$ and $\gamma$ are taken from Koslover and Spokowitz, with
+different degres of chain flexibility \(l_0/l_p\).
+
+
+\section{Force derivatives}
+
+The forces that act on each particle are taken from the deriative of equation
+\ref{eqn:Energy_polymer_discrete}, with respect to each particle position.
+
+First, let's break up the energy term into three parts.
+\begin{equation}
+  \label{eqn:Energy_polymer_broken}
+  \beta E_{\text{poly}}  =  \sum_{i=1}^{n_P}  \sum_{j=2}^{N} \left[
+  \overbrace{\frac{\varepsilon_b}{2 l_0}  
+  \magn{ \harp u \ij - \harp u \ijj - \eta \harp R\ij ^\bot} ^2}^{\text{Part 1}} 
+  +
+  \overbrace{
+   \frac{\varepsilon_{\vert \vert}}{2 l_0} 
+   \left( \harp R\ij \cdot \harp u \ijj - l_0 \gamma \right)^2 }
+   ^{\text{Part 2}}
+   +
+   \overbrace{\frac{\varepsilon _\perp}
+   {2l_0} \magn{\harp R\ijj ^\perp}^2} ^ {\text{Part 3}}
+  \right]
+\end{equation}
+
+\subsection{Derivates of common terms}
+\subsubsection{Orientation derivatives}
+
+\begin{align*}
+  \part{\harp u \ijj }{\harp r \ij} = \frac{\ten{\delta }}{\magn{\harp r \ij - \harp r \ijjj}} - 
+  \frac{
+    \left(\rij - \rijk \right)\otimes 
+  \left(\rij - \rijk \right)
+  }{
+    \magn{\rij - \rijjj } ^3
+    }
+\end{align*}
+
+
+\begin{align*}
+  \part{\harp u \ijj }{\harp r \ijj} = \ten{0}
+\end{align*}
+
+
+\begin{align*}
+  \part{\harp u \ijj }{\harp r \ijk} =   \frac{-\ten{\delta }}{\magn{\harp r \ij - \harp r \ijjj}} 
+  +
+  \frac{
+    \left(\rij - \rijk \right)\otimes 
+  \left(\rij - \rijk \right)
+  }{
+    \magn{\rij - \rijjj } ^3
+    }
+\end{align*}
+
+
+
+ \subsubsection{Other area}
+\begin{align*}
+  \label{eqn:Rperpri}
+  \part{\harp R\ij ^ \bot}{\harp r\ij}  &=  \ten{I} 
+  - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+  \harp u \ijj \right)
+  }{\harp r\ij}
+\end{align*}
+
+\begin{align*}
+  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ij}   
+  &= 
+  \harp R\ij \cdot \part{\harp u \ijj}{\harp r \ij} + \part{\harp R \ij}{\harp r \ij} \cdot \harp u\ijj
+  \\
+  &= 
+  \harp R\ij \cdot  \frac{\rij - \harp r\ijjj}{\magn{\harp r \ij - \harp r\ijk}}
+\end{align*}
+
+% \subsection{Part 1}
+
+
+% \subsection{Part 3}
+
+% \begin{align*}
+%   \partbig{\magn{\harp R\ijj ^ \perp}^2}{\harp \ij} = 
+% \end{align*}
+
+
+
+
+\end{document}
