@@ -15,9 +15,14 @@
 \newcommand{\harpoon}{\overset{\rightharpoonup}}
 \newcommand{\ten}[1]{\underline{\underline{#1}}}
 \newcommand{\rij}{\harp r \ij}
+\newcommand{\Rij}{\harp R \ij}
 \newcommand{\rijj}{\harp r \ijj}
 \newcommand{\rijjj}{\harp r \ijjj}
 \newcommand{\rijk}{\harp r \ijk}
+\newcommand{\uij}{\harp u \ij}
+\newcommand{\uijj}{\harp u \ijj}
+\newcommand{\uijjj}{\harp u \ijjj}
+\newcommand{\uijk}{\harp u \ijk}
 
 
 \begin{document}
@@ -122,6 +127,8 @@ First, let's break up the energy term into three parts.
 
 
  \subsubsection{Other area}
+
+Calculation for the derivative with respect to d$\rij$
 \begin{align*}
   \label{eqn:Rperpri}
   \part{\harp R\ij ^ \bot}{\harp r\ij}  &=  \ten{I} 
@@ -136,9 +143,355 @@ First, let's break up the energy term into three parts.
   \harp R\ij \cdot \part{\harp u \ijj}{\harp r \ij} + \part{\harp R \ij}{\harp r \ij} \cdot \harp u\ijj
   \\
   &= 
-  \harp R\ij \cdot  \frac{\rij - \harp r\ijjj}{\magn{\harp r \ij - \harp r\ijk}}
+  - \harp R\ij \cdot  \frac{(\rij - \harp r\ijjj)(\rij - \harp r\ijjj)}
+  {\magn{\harp r \ij - \harp r\ijk}^3}
+  + \ten{\delta} \cdot \harp u \ijj 
+  \\
+  &= 
+-\frac{\harp R \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
++  \uijj
+  % + \frac{\rij - \rijjj}{\magn{\rij - \rijjj } }
 \end{align*}
 
+\begin{align*}
+  \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+  \harp u \ijj \right)
+  }{\harp r\ij} 
+  &= 
+  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ij}  
+  \otimes \harp u \ijj  + 
+  \left(\harp R\ij \cdot \harp u \ijj \right)
+  \otimes 
+  \part{\harp u \ijj }{\harp r\ij}
+   \\
+  &= 
+  \left(
+  -\frac{\harp R \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
+  +  \uijj
+  \right) \otimes \uijj\\
+  & \quad 
+  +  
+  \left(\harp R\ij \cdot \harp u \ijj \right)
+  \otimes 
+  \underbrace{\part{\harp u \ijj }{\harp r\ij} }_{\text{Derived above}}
+\end{align*}
+% \frac{\left( \harp r\ij-\harp r\ijk \right)}{\magn{\harp r\ij - \harp r\ijk}} 
+
+% \begin{align*}
+%   - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+%   \harp u \ijj\right)
+%   }{\harp r\ij}
+%   % \left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+%   % \harp u \ijj 
+%   &= 
+%   \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ij} \otimes
+%   \uijj 
+%   +
+%   \left(\harp R\ij \cdot \harp u \ijj \right) \otimes
+%   \part{\uijj }{\harp r\ij} 
+%   \\
+%   &= 
+%   \left(\frac{\rijjj - \rijj }{\magn{\rijjj - \rijj}} 
+%   - (\Rij) \cdot \frac{\uijj \otimes \uijj}{\magn{\rij - \rijjj}}\right)
+%   \otimes \uijj 
+%   + \left(\Rij \cdot \uijj \right) \otimes \ten{0}
+%   \\
+%   &= 
+%   \left(\frac{\rijjj - \rijj }{\magn{\rijjj - \rijj}} 
+%   - (\Rij) \cdot \frac{\uijj \otimes \uijj}{\magn{\rij - \rijjj}}\right)
+%   \otimes \uijj 
+%   \\
+%   &= 
+%   \left(\rijjj - \rijj  
+%   - (\Rij) \cdot \uijj \otimes \uijj\right)
+%   \otimes \frac{\uijj }{\magn{\rij - \rijjj}}
+% \end{align*}
+
+Now plugging in that definition into the derivative we're looking for.
+
+\begin{align*}
+  \part{\harp R\ij ^ \bot}{\harp r\ij}  &=  \ten{\delta} 
+  - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+  \harp u \ijj \right)
+  }{\harp r\ij} \\
+  &= 
+  \ten{\delta} 
+  -
+  \left[
+  \left(
+  -\frac{\harp R \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
+  +  \uijj
+  \right) \otimes \uijj
+  +  
+  \left(\harp R\ij \cdot \harp u \ijj \right)
+  \otimes 
+  {\part{\harp u \ijj }{\harp r\ij} }
+  \right]
+\end{align*}
+ 
+%% End of the first derivative calculation. 
+
+
+And now the derivative for d$\rijj$
+\begin{align*}
+  \part{\harp R\ij ^ \bot}{\harp r\ijj}  &= - \ten{\delta} 
+  - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+  \harp u \ijj \right)
+  }{\harp r\ijj}
+\end{align*}
+
+
+\begin{align*}
+  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ijj}   
+  &= 
+  \harp R\ij \cdot \part{\harp u \ijj}{\harp r \ijj} + \part{\harp R \ij}{\harp r \ijj} \cdot \harp u\ijj
+  \\
+  &= 
+  \Rij \cdot \left( \ten{0}
+  \right) 
+  - \ten{\delta} \cdot \frac{\left( \rij - \rijjj \right)}{\magn{\rij - \rijjj}} 
+  \\ 
+  &= 
+  - \ten{\delta} \cdot \frac{\left( \rij - \rijjj \right)}{\magn{\rij - \rijjj}} 
+  =
+  - \ten{\delta} \cdot \uijj
+  =
+  - \uijj
+\end{align*}
+
+\begin{align*}
+  \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+  \harp u \ijj \right)
+  }{\harp r\ijj}
+  % \left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+  % \harp u \ijj 
+  &= 
+  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ijj} \otimes
+  \uijj 
+  +
+  \left(\harp R\ij \cdot \harp u \ijj \right) \otimes
+  \part{\uijj }{\harp r\ijj} 
+  \\
+  &= 
+  - \ten{\delta} \cdot \uijj 
+  % \left(\frac{\rijjj - \rijj }{\magn{\rijjj - \rijj}} 
+  % - (\Rij) \cdot \frac{\uijj \otimes \uijj}{\magn{\rij - \rijjj}}\right)
+  \otimes \uijj 
+  + \left(\Rij \cdot \uijj \right) \otimes \ten{0}
+  \\
+  &= 
+  - \uijj \otimes \uijj
+  % \\
+  % &= 
+  % \left(\frac{\rijjj - \rijj }{\magn{\rijjj - \rijj}} 
+  % - (\Rij) \cdot \frac{\uijj \otimes \uijj}{\magn{\rij - \rijjj}}\right)
+  % \otimes \uijj 
+  % \\
+  % &= 
+  % \left(\rijjj - \rijj  
+  % - (\Rij) \cdot \uijj \otimes \uijj\right)
+  % \otimes \frac{\uijj }{\magn{\rij - \rijjj}}
+\end{align*}
+
+Now plugging in that definition into the derivative we're looking for.
+
+\begin{align*}
+  \part{\harp R\ij ^ \bot}{\harp r\ijj}  &= - \ten{\delta} 
+  - \part{\left(\left(\harp R\ij \cdot \uijj \right) \otimes 
+  \harp u \ijj \right)
+  }{\harp r\ijj} 
+  \\
+  &= -
+  \ten{\delta}
+  -
+  \left( - \uijj \otimes \uijj \right)
+  \\
+  &= 
+  -
+  \ten{\delta} + 
+  \uijj \otimes \uijj 
+  % \left(\rijjj - \rijj  
+  % - (\Rij) \cdot \uijj \otimes \uijj\right)
+  % \otimes \frac{\uijj }{\magn{\rij - \rijjj}}
+\end{align*}
+
+
+And now the derivative for d$\rijjj$
+
+\begin{align*}
+  \part{\harp R\ij ^ \bot}{\harp r\ijk}  &=  
+  0
+  - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
+  \harp u \ijj \right)
+  }{\harp r\ijjj}
+\end{align*}
+
+
+\begin{align*}
+  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ijk}   
+  &= 
+  \harp R\ij \cdot \part{\harp u \ijj}{\harp r \ijjj} + 
+  \part{\harp R \ij}{\harp r \ijjj} \cdot \harp u\ijj
+  \\
+  &= 
+  \ten{0} + 
+  \underbrace{
+  \left(
+  \Rij \cdot  \part{\uijj}{\rijjj} 
+  \right)}_{\text{Defined above}}
+\end{align*}
+
+
+
+\begin{align*}
+  \left(  
+  \part{
+  \left(\harp R\ij \cdot \harp u \ijj \right)\otimes \uijj}{\harp r\ijk}  
+  \right)
+  &= 
+  \left(  
+  \part{
+  \left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ijk}  
+  \right)\otimes \uijj 
+  + 
+  \harp R\ij \cdot \harp u \ijj
+  \otimes
+  \left(  
+  \part{
+  ( \uijj  )}{\harp r\ijk}  
+  \right)
+  \\
+  &= 
+  \left(  
+  \Rij \cdot  \part{\uijj}{\rijjj} 
+  \right)
+  \otimes \uijj 
+  + 
+  \harp R\ij \cdot \harp u \ijj
+  \otimes
+  \left(  
+  \part{
+  ( \uijj  )}{\harp r\ijk}  
+  \right)
+\end{align*}
+
+
+
+Now plugging in that definition into the derivative we're looking for.
+
+\begin{align*}
+  \part{\harp R\ij ^ \bot}{\harp r\ijk}  &=  
+  -\left[
+  \left(  
+  \Rij \cdot  \part{\uijj}{\rijjj} 
+  \right)
+  \otimes \uijj 
+  + 
+  \harp R\ij \cdot \harp u \ijj
+  \otimes
+  \left(  
+  \part{
+  ( \uijj  )}{\harp r\ijk}  
+  \right)
+  \right]
+\end{align*}
+
+\subsection{Part 1 Derivation}
+
+\begin{align*}
+  \magn{\uij - \uijj - \eta \Rij^\perp}^2 
+  &=
+  \left(\uij - \uijj - \eta \Rij^\perp\right)
+  \cdot 
+  \left(\uij - \uijj - \eta \Rij^\perp\right)
+  \\
+  \part{\magn{\uij - \uijj - \eta \Rij^\perp}^2 }{
+    \rij 
+  }
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  \part{\left(\uij - \uijj - \eta \Rij^\perp\right)}{\rij}
+  \\
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  \part{\left(- \uijj - \eta \Rij^\perp\right)}{\rij}
+\end{align*}
+
+
+\begin{align*}
+  \part{\magn{\uij - \uijj - \eta \Rij^\perp}^2 }{
+    \rijj
+  }
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  \part{\left(\uij - \uijj - \eta \Rij^\perp\right)}{\rijj}
+  \\
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  \part{\left(\uij - \eta \Rij^\perp\right)}{\rijj}
+\end{align*}
+
+
+\begin{align*}
+  \part{\magn{\uij - \uijj - \eta \Rij^\perp}^2 }{
+    \rijjj
+  }
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  \part{\left(\uij - \uijj - \eta \Rij^\perp\right)}{\rijjj}
+\end{align*}
+
+
+\subsection{Part 2 Derivation}
+
+\begin{align*}
+  \part{\left(\Rij \cdot \uijj - l_0\gamma\right)^2}{\rij }
+  &=
+2(\Rij \cdot \uijj - l_0\gamma)
+\cdot 
+\part{\left(\Rij \cdot \uijj\right)}{\rij}
+\end{align*}
+
+\begin{align*}
+  \part{\left(\Rij \cdot \uijj - l_0\gamma\right)^2}{\rijj }
+  &=
+2(\Rij \cdot \uijj - l_0\gamma)
+\cdot 
+\part{\left(\Rij \cdot \uijj\right)}{\rijj}
+\end{align*}
+
+\begin{align*}
+  \part{\left(\Rij \cdot \uijj - l_0\gamma\right)^2}{\rijjj }
+  &=
+2(\Rij \cdot \uijj - l_0\gamma)
+\cdot 
+\part{\left(\Rij \cdot \uijj\right)}{\rijjj}
+\end{align*}
+
+\subsection{Part 3 Derivation}
+For the next three definitions, plug in the values that were previously calculated. 
+
+\begin{align*}
+  \part{
+    \magn{\Rij^\perp}^2
+  }{ \rij }
+  &= 
+  2 \Rij^\perp \cdot \part{\Rij^\perp}{\rij}
+\end{align*}
+\begin{align*}
+  \part{
+    \magn{\Rij^\perp}^2
+  }{ \rijj }
+  &= 
+  2 \Rij^\perp \cdot \part{\Rij^\perp}{\rijj}
+\end{align*}
+\begin{align*}
+  \part{
+    \magn{\Rij^\perp}^2
+  }{ \rijjj }
+  &= 
+  2 \Rij^\perp \cdot \part{\Rij^\perp}{\rijjj}
+\end{align*}
 % \subsection{Part 1}
 
 
