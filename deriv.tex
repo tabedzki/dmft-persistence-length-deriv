@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1.0in]{geometry}
 \usepackage{color}
+\usepackage{clipboard}
 \usepackage{amsmath,amssymb}
 \renewcommand{\ij}{_{i,j}}
 \newcommand{\ijj}{_{i,j-1}}
@@ -11,18 +12,18 @@
 \newcommand{\magn}[1]{\left\vert #1 \right\vert }
 \renewcommand{\part}[2]{\frac{\partial #1 }{\partial #2}}
 \newcommand{\partbig}[2]{\frac{\partial }{\partial #2}\left( #1 \right)}
-\newcommand{\harp}{\overset{\rightharpoonup}}
+\newcommand{\harp}{\vec{}}
 \newcommand{\harpoon}{\overset{\rightharpoonup}}
 \newcommand{\ten}[1]{\underline{\underline{#1}}}
-\newcommand{\rij}{\harp r \ij}
-\newcommand{\Rij}{\harp R \ij}
-\newcommand{\rijj}{\harp r \ijj}
-\newcommand{\rijjj}{\harp r \ijjj}
-\newcommand{\rijk}{\harp r \ijk}
-\newcommand{\uij}{\harp u \ij}
-\newcommand{\uijj}{\harp u \ijj}
-\newcommand{\uijjj}{\harp u \ijjj}
-\newcommand{\uijk}{\harp u \ijk}
+\newcommand{\rij}{\vec{r} \ij}
+\newcommand{\Rij}{\vec{R} \ij}
+\newcommand{\rijj}{\vec{r} \ijj}
+\newcommand{\rijjj}{\vec{r} \ijjj}
+\newcommand{\rijk}{\vec{r} \ijk}
+\newcommand{\uij}{\vec{u} \ij}
+\newcommand{\uijj}{\vec{u} \ijj}
+\newcommand{\uijjj}{\vec{u} \ijjj}
+\newcommand{\uijk}{\vec{u} \ijk}
 
 
 \begin{document}
@@ -30,7 +31,6 @@
   \textbf{Persistence length interactions and force Derviation.}\\
   \textsc{Christian Tabedzki}
 \end{center} 
-
 
 
 For this report, we derive the forces for each particle involved on the polymer backbone to.
@@ -41,80 +41,118 @@ The energy is defined as
 
 \begin{equation}
   \label{eqn:Energy_polymer}
-  \beta E_{\text{poly}}  =  \frac{l_p}{2} \sum_{i=1}^{n_p} \int_0^L ds \left(\part{\harp u_i}{s}\right)^2
+  \beta E_{\text{poly}}  =  \frac{l_p}{2} \sum_{i=1}^{n_p} \int_0^L ds \left(\part{\vec{u}_i}{s}\right)^2
 \end{equation}
 which when discretized becomes
 \begin{equation}
   \label{eqn:Energy_polymer_discrete}
   \beta E_{\text{poly}}  =  \sum_{i=1}^{n_P}  \sum_{j=2}^{N} \left[
-  \frac{\varepsilon_b}{2 l_0}  \magn{ \harp u \ij - \harp u \ijj - \eta \harp R\ij ^\bot} ^2 +
-   \frac{\varepsilon_{\vert \vert}}{2 l_0} 
-   \left( \harp R\ij \cdot \harp u \ijj - l_0 \gamma \right)^2 +
-   \frac{\varepsilon _\perp}
-   {2l_0} \magn{\harp R\ijj ^\perp}^2
+  \overbrace{
+  \frac{\varepsilon_b}{2 l_0}  \magn{ \vec{u} \ij - \vec{u} \ijj - \eta 
+  \vec{R}\ij ^\bot} ^2 
+  }^{\text{bending component}}
+  +
+\overbrace{
+  \frac{\varepsilon_{\vert \vert}}{2 l_0} 
+  \left( \vec{R}\ij \cdot \vec{u} \ijj - l_0 \gamma \right)^2 
+  }^{\text{compression potential}}
+  +
+  \overbrace{
+  \frac{\varepsilon _\perp}
+  {2l_0} \magn{\vec{R}\ijj ^\perp}^2
+  }^{\text{shearing component}}
   \right]
 \end{equation}
 where 
 \[
-\harp  R\ij  ^\bot = \harp R \ij - \left(\harp R \ij \cdot \harp u \ijj \right) \harp u \ijj 
+\vec{R}\ij  ^\bot = \vec{R} \ij - \left(\vec{R} \ij \cdot \vec{u} \ijj \right) \vec{u} \ijj 
 \]
-which represents the component of \(\harp R \ij\) vector perpendicular to \(\harp u \ijj \).
-\(\harp u \ijj \) is defined as  
-  \[\harp u_{i,j-1} = 
-  \part{\harp{r}_i(s)}{s} = 
-    \frac{\left( \harp r\ij-\harp r\ijk \right)}{\magn{\harp r\ij - \harp r\ijk}} \]
-which means the orietation of \(\harp u_{i,j-1}\) is independent of the position of \(\harp r\ijj\), where 
-\[\harp R \ij = \harp r \ij - \harp r \ijj \]
+which represents the component of \(\vec{R} \ij\) vector perpendicular to \(\vec{u} \ijj \).
+\(\vec{u} \ijj \) is defined as  
+  \[
+  \vec{u}_{i,j-1} = 
+  \part{\vec{{}r}_i(s)}{s} = 
+    \frac{\left( \vec{r}\ij-\vec{r}\ijk \right)}{\magn{\vec{r}\ij - \vec{r}\ijk}} \]
+except for the first particle on the chain, which will be defined as 
+\[
+  \vec{u}_{12} = \frac{\vec{r}_{21}}{\magn{\vec{r}_{21}}} = 
+  \frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}
+\]
+which means the orientation of \(\vec{u}_{i,j-1}\) is (for the most part)
+independent of the position of \(\vec{r}\ijj\). The difference vector between
+two adjacent monomers will be defined as  
+\[\vec{R} \ij = \vec{r} \ij - \vec{r} \ijj \]
 
-Additionally, The energnetic coefficients of bending $\varepsilon_b$,
+\noindent
+Additionally, the energetic coefficients of bending $\varepsilon_b$,
 compression $\varepsilon_{\vert \vert}$, and shearing $\varepsilon_\perp$, as
-well as $\eta$ and $\gamma$ are taken from Koslover and Spokowitz, with
-different degres of chain flexibility \(l_0/l_p\).
+well as $\eta$ and $\gamma$ were originally taken from Koslover and Spokowitz, with
+different degrees of chain flexibility \(l_0/l_p\).
 
 
 \section{Force derivatives}
 
-The forces that act on each particle are taken from the deriative of equation
-\ref{eqn:Energy_polymer_discrete}, with respect to each particle position.
+The forces that act on each particle are taken from the derivative of equation
+\ref{eqn:Energy_polymer_discrete}, with respect to each particle position. We
+wil break up the energy term into three parts, but it will also be useful to have the fundamental derivatives out of the way so we can just refer to them.
 
-First, let's break up the energy term into three parts.
 \begin{equation}
   \label{eqn:Energy_polymer_broken}
   \beta E_{\text{poly}}  =  \sum_{i=1}^{n_P}  \sum_{j=2}^{N} \left[
   \overbrace{\frac{\varepsilon_b}{2 l_0}  
-  \magn{ \harp u \ij - \harp u \ijj - \eta \harp R\ij ^\bot} ^2}^{\text{Part 1}} 
+  \magn{ \vec{u} \ij - \vec{u} \ijj - \eta \vec{R}\ij ^\bot} ^2}^{\text{Part 1}} 
   +
   \overbrace{
    \frac{\varepsilon_{\vert \vert}}{2 l_0} 
-   \left( \harp R\ij \cdot \harp u \ijj - l_0 \gamma \right)^2 }
+   \left( \vec{R}\ij \cdot \vec{u} \ijj - l_0 \gamma \right)^2 }
    ^{\text{Part 2}}
    +
    \overbrace{\frac{\varepsilon _\perp}
-   {2l_0} \magn{\harp R\ijj ^\perp}^2} ^ {\text{Part 3}}
+   {2l_0} \magn{\vec{R}\ijj ^\perp}^2} ^ {\text{Part 3}}
   \right]
 \end{equation}
 
-\subsection{Derivates of common terms}
+\subsection{Derivatives of common terms}
 \subsubsection{Orientation derivatives}
 
 \begin{align*}
-  \part{\harp u \ijj }{\harp r \ij} = \frac{\ten{\delta }}{\magn{\harp r \ij - \harp r \ijjj}} - 
+  \part{\vec{u} \ijj }{\vec{r} \ij} 
+  &= \frac{\ten{\delta }}{\magn{\vec{r} \ij - \vec{r} \ijjj}} - 
   \frac{
     \left(\rij - \rijk \right)\otimes 
   \left(\rij - \rijk \right)
   }{
     \magn{\rij - \rijjj } ^3
     }
+  \\
+  &
+  =
+  \frac{\ten{\delta}}{\magn{\rij - \rijjj}} 
+  -
+  \frac{\uijj \otimes \uijjj}{\magn{\rij - \rijjj}}\\
+  &  =
+  \Copy{dudij}
+  % \newcommand{\dudij}
+  {
+  \frac{\ten{\delta} - \uijj \otimes \uijjj}{\magn{\rij - \rijjj}}
+  }
+  % dudij
+  % \Paste{dudij}
 \end{align*}
 
 
 \begin{align*}
-  \part{\harp u \ijj }{\harp r \ijj} = \ten{0}
+  \Paste{dudij}
+  \part{\vec{u} \ijj }{\vec{r} \ijj} = 
+  \Copy{dudijj}{ \ten{0}}
+  % \newcommand{\dudijj}{ \ten{0}}
+  % \dudijj
 \end{align*}
 
-
 \begin{align*}
-  \part{\harp u \ijj }{\harp r \ijk} =   \frac{-\ten{\delta }}{\magn{\harp r \ij - \harp r \ijjj}} 
+  \part{\vec{u} \ijj }{\vec{r} \ijk} 
+  &=
+     \frac{-\ten{\delta }}{\magn{\vec{r} \ij - \vec{r} \ijjj}} 
   +
   \frac{
     \left(\rij - \rijk \right)\otimes 
@@ -122,73 +160,183 @@ First, let's break up the energy term into three parts.
   }{
     \magn{\rij - \rijjj } ^3
     }
+  \\
+  & =
+  \frac{\uijj \otimes \uijj}{\magn{\rij - \rijjj}}
+  -
+  \frac{\ten{\delta}}{\magn{\rij - \rijjj}} 
+  \\
+  &  =
+  \Copy{dudijjj}
+  {
+  \frac{\uijj \otimes \uijj - \ten{\delta} }{\magn{\rij - \rijjj}}
+  }
+\end{align*}
+
+
+\subsubsection{Orientation derivatives (unique case)}
+
+\begin{align*}
+  \part{\vec{u}_{12}}{\vec{r}_{2}} 
+  &=
+  \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
+  {\vec{r}_{2}}
+  \\
+  &=
+  \frac{\ten{\delta}}
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+  - 
+  \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
+  \otimes 
+  (\vec{r}_{2} - \vec{r}_{1} )
+  }
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
+  & = 
+  \frac{
+  \ten{\delta}  
+  -
+  (\vec{r}_{2} - \vec{r}_{1} ) 
+  \otimes 
+  (\vec{r}_{2} - \vec{r}_{1} )
+  }
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
 \end{align*}
 
 
 
- \subsubsection{Other area}
+\begin{align*}
+  \part{\vec{u}_{12}}{\vec{r}_{1}} 
+  &=
+  \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
+  {\vec{r}_{1}}
+  \\
+  &=
+  \frac{-\ten{\delta}}
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+  + 
+  \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
+  \otimes 
+  (\vec{r}_{2} - \vec{r}_{1} )
+  }
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
+  & = 
+  \frac{
+  (\vec{r}_{2} - \vec{r}_{1} ) 
+  \otimes 
+  (\vec{r}_{2} - \vec{r}_{1} )
+  -
+  \ten{\delta}  
+  }
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+\end{align*}
 
-Calculation for the derivative with respect to d$\rij$
+ \subsubsection{Calculating $\displaystyle\partbig{\Rij^\perp}{\rij}$}
+
+% Calculation for the derivative with respect to d$\rij$
 \begin{align*}
   \label{eqn:Rperpri}
-  \part{\harp R\ij ^ \bot}{\harp r\ij}  &=  \ten{I} 
-  - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-  \harp u \ijj \right)
-  }{\harp r\ij}
+  \part{\vec{R}\ij ^ \bot}{\vec{r}\ij}  
+  &=
+  \part{\Rij}{\rij}
+  - \part{\left(\left(\vec{r}\ij \cdot \vec{u} \ijj \right) \otimes 
+  \vec{u} \ijj \right)
+  }{\vec{r}\ij}
+  \\
+  &=
+  \ten{\delta} 
+  - \part{\left(\left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
+  \vec{u} \ijj \right)
+  }{\vec{r}\ij}
 \end{align*}
 
 \begin{align*}
-  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ij}   
+  \part{\left(\vec{R}\ij \cdot \vec{u} \ijj \right)}{\vec{r}\ij}   
   &= 
-  \harp R\ij \cdot \part{\harp u \ijj}{\harp r \ij} + \part{\harp R \ij}{\harp r \ij} \cdot \harp u\ijj
+  \vec{R}\ij \cdot \part{\vec{u} \ijj}{\vec{r} \ij} + \part{\vec{R} \ij}{\vec{r} \ij} \cdot \vec{u}\ijj
   \\
   &= 
-  - \harp R\ij \cdot  \frac{(\rij - \harp r\ijjj)(\rij - \harp r\ijjj)}
-  {\magn{\harp r \ij - \harp r\ijk}^3}
-  + \ten{\delta} \cdot \harp u \ijj 
+  \vec{R}\ij \cdot 
+  \left(
+  {
+  \frac{\ten{\delta} - \uijj \otimes \uijj}{\magn{\rij - \rijjj}}
+  }
+  \right)
+  +
+  \part{\vec{R} \ij}{\vec{r} \ij} \cdot \vec{u}\ijj
+  % \vec{R}\ij \cdot \dudij + \part{\vec{R} \ij}{\vec{r} \ij} \cdot \vec{u}\ijj
   \\
   &= 
--\frac{\harp R \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-+  \uijj
+  - \vec{R}\ij \cdot  \frac{(\rij - \vec{r}\ijjj)
+  \otimes
+  (\rij - \vec{r}\ijjj)}
+  {\magn{\vec{r} \ij - \vec{r}\ijk}^3}
+  + \ten{\delta} \cdot \vec{u} \ijj 
+  + \Rij \cdot \frac{\ten{\delta}}{\magn{\rij - \rijjj}}
+  \\
+  &= 
+  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
+  +  \uijj
+  +  \frac{\Rij}{\magn{\rij - \rijjj}}
+  \\
+  &= 
+  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
+  +  \frac{\rij - \rijjj}{\magn{\rij - \rijjj}}
+  +  \frac{\Rij}{\magn{\rij - \rijjj}}
+  \\
+  &= 
+  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
+  +  \frac{\rij - \rijjj + \Rij}{\magn{\rij - \rijjj}}
   % + \frac{\rij - \rijjj}{\magn{\rij - \rijjj } }
 \end{align*}
 
 \begin{align*}
-  \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-  \harp u \ijj \right)
-  }{\harp r\ij} 
+  \part{\left(\left(\vec{R}\ij \cdot \vec{u} \ijj \right) 
+  % \otimes 
+  \vec{u} \ijj \right)
+  }{\vec{r}\ij} 
   &= 
-  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ij}  
-  \otimes \harp u \ijj  + 
-  \left(\harp R\ij \cdot \harp u \ijj \right)
-  \otimes 
-  \part{\harp u \ijj }{\harp r\ij}
+  \part{\left(\vec{R}\ij \cdot \vec{u} \ijj \right)}{\vec{r}\ij}  
+  \otimes
+  \vec{u} \ijj  + 
+  \left(\vec{R}\ij \cdot \vec{u} \ijj \right)
+  % \otimes 
+  \part{\vec{u} \ijj }{\vec{r}\ij}
    \\
   &= 
   \left(
-  -\frac{\harp R \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
+  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
   +  \uijj
-  \right) \otimes \uijj\\
-  & \quad 
+  +  \frac{\Rij}{\magn{\rij - \rijjj}}
+  % -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
+  % +  \uijj
+  \right) \otimes \uijj
+  \\
+  &
+   \quad 
   +  
-  \left(\harp R\ij \cdot \harp u \ijj \right)
-  \otimes 
-  \underbrace{\part{\harp u \ijj }{\harp r\ij} }_{\text{Derived above}}
+  \left(\vec{R}\ij \cdot \vec{u} \ijj \right)
+  % \otimes 
+  % \underbrace{\part{\vec{u} \ijj }{\vec{r}\ij} }_{\text{Derived above}}
+  \left(
+  {
+  \frac{\ten{\delta} - \uijj \otimes \uijj}{\magn{\rij - \rijjj}}
+  }
+  \right)
 \end{align*}
-% \frac{\left( \harp r\ij-\harp r\ijk \right)}{\magn{\harp r\ij - \harp r\ijk}} 
+% \frac{\left( \vec{r}\ij-\vec{r}\ijk \right)}{\magn{\vec{r}\ij - \vec{r}\ijk}} 
 
 % \begin{align*}
-%   - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-%   \harp u \ijj\right)
-%   }{\harp r\ij}
-%   % \left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-%   % \harp u \ijj 
+%   - \part{\left(\left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
+%   \vec{u} \ijj\right)
+%   }{\vec{r}\ij}
+%   % \left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
+%   % \vec{u} \ijj 
 %   &= 
-%   \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ij} \otimes
+%   \part{\left(\vec{R}\ij \cdot \vec{u} \ijj \right)}{\vec{r}\ij} \otimes
 %   \uijj 
 %   +
-%   \left(\harp R\ij \cdot \harp u \ijj \right) \otimes
-%   \part{\uijj }{\harp r\ij} 
+%   \left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes
+%   \part{\uijj }{\vec{r}\ij} 
 %   \\
 %   &= 
 %   \left(\frac{\rijjj - \rijj }{\magn{\rijjj - \rijj}} 
@@ -210,22 +358,22 @@ Calculation for the derivative with respect to d$\rij$
 Now plugging in that definition into the derivative we're looking for.
 
 \begin{align*}
-  \part{\harp R\ij ^ \bot}{\harp r\ij}  &=  \ten{\delta} 
-  - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-  \harp u \ijj \right)
-  }{\harp r\ij} \\
+  \part{\vec{R}\ij ^ \bot}{\vec{r}\ij}  &=  \ten{\delta} 
+  - \part{\left(\left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
+  \vec{u} \ijj \right)
+  }{\vec{r}\ij} \\
   &= 
   \ten{\delta} 
   -
   \left[
   \left(
-  -\frac{\harp R \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
+  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
   +  \uijj
   \right) \otimes \uijj
   +  
-  \left(\harp R\ij \cdot \harp u \ijj \right)
+  \left(\vec{R}\ij \cdot \vec{u} \ijj \right)
   \otimes 
-  {\part{\harp u \ijj }{\harp r\ij} }
+  {\part{\vec{u} \ijj }{\vec{r}\ij} }
   \right]
 \end{align*}
  
@@ -234,17 +382,17 @@ Now plugging in that definition into the derivative we're looking for.
 
 And now the derivative for d$\rijj$
 \begin{align*}
-  \part{\harp R\ij ^ \bot}{\harp r\ijj}  &= - \ten{\delta} 
-  - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-  \harp u \ijj \right)
-  }{\harp r\ijj}
+  \part{\vec{R}\ij ^ \bot}{\vec{r}\ijj}  &= - \ten{\delta} 
+  - \part{\left(\left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
+  \vec{u} \ijj \right)
+  }{\vec{r}\ijj}
 \end{align*}
 
 
 \begin{align*}
-  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ijj}   
+  \part{\left(\vec{R}\ij \cdot \vec{u} \ijj \right)}{\vec{r}\ijj}   
   &= 
-  \harp R\ij \cdot \part{\harp u \ijj}{\harp r \ijj} + \part{\harp R \ij}{\harp r \ijj} \cdot \harp u\ijj
+  \vec{R}\ij \cdot \part{\vec{u} \ijj}{\vec{r} \ijj} + \part{\vec{R} \ij}{\vec{r} \ijj} \cdot \vec{u}\ijj
   \\
   &= 
   \Rij \cdot \left( \ten{0}
@@ -260,17 +408,17 @@ And now the derivative for d$\rijj$
 \end{align*}
 
 \begin{align*}
-  \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-  \harp u \ijj \right)
-  }{\harp r\ijj}
-  % \left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-  % \harp u \ijj 
+  \partbig{\left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
+  \vec{u} \ijj 
+  }{\vec{r}\ijj}
+  % \left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
+  % \vec{u} \ijj 
   &= 
-  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ijj} \otimes
+  \part{\left(\vec{R}\ij \cdot \vec{u} \ijj \right)}{\vec{r}\ijj} \otimes
   \uijj 
   +
-  \left(\harp R\ij \cdot \harp u \ijj \right) \otimes
-  \part{\uijj }{\harp r\ijj} 
+  \left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes
+  \part{\uijj }{\vec{r}\ijj} 
   \\
   &= 
   - \ten{\delta} \cdot \uijj 
@@ -296,10 +444,10 @@ And now the derivative for d$\rijj$
 Now plugging in that definition into the derivative we're looking for.
 
 \begin{align*}
-  \part{\harp R\ij ^ \bot}{\harp r\ijj}  &= - \ten{\delta} 
-  - \part{\left(\left(\harp R\ij \cdot \uijj \right) \otimes 
-  \harp u \ijj \right)
-  }{\harp r\ijj} 
+  \part{\vec{R}\ij ^ \bot}{\vec{r}\ijj}  &= - \ten{\delta} 
+  - \part{\left(\left(\vec{R}\ij \cdot \uijj \right) \otimes 
+  \vec{u} \ijj \right)
+  }{\vec{r}\ijj} 
   \\
   &= -
   \ten{\delta}
@@ -319,19 +467,19 @@ Now plugging in that definition into the derivative we're looking for.
 And now the derivative for d$\rijjj$
 
 \begin{align*}
-  \part{\harp R\ij ^ \bot}{\harp r\ijk}  &=  
+  \part{\vec{R}\ij ^ \bot}{\vec{r}\ijk}  &=  
   0
-  - \part{\left(\left(\harp R\ij \cdot \harp u \ijj \right) \otimes 
-  \harp u \ijj \right)
-  }{\harp r\ijjj}
+  - \part{\left(\left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
+  \vec{u} \ijj \right)
+  }{\vec{r}\ijjj}
 \end{align*}
 
 
 \begin{align*}
-  \part{\left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ijk}   
+  \part{\left(\vec{R}\ij \cdot \vec{u} \ijj \right)}{\vec{r}\ijk}   
   &= 
-  \harp R\ij \cdot \part{\harp u \ijj}{\harp r \ijjj} + 
-  \part{\harp R \ij}{\harp r \ijjj} \cdot \harp u\ijj
+  \vec{R}\ij \cdot \part{\vec{u} \ijj}{\vec{r} \ijjj} + 
+  \part{\vec{R} \ij}{\vec{r} \ijjj} \cdot \vec{u}\ijj
   \\
   &= 
   \ten{0} + 
@@ -346,19 +494,19 @@ And now the derivative for d$\rijjj$
 \begin{align*}
   \left(  
   \part{
-  \left(\harp R\ij \cdot \harp u \ijj \right)\otimes \uijj}{\harp r\ijk}  
+  \left(\vec{R}\ij \cdot \vec{u} \ijj \right)\otimes \uijj}{\vec{r}\ijk}  
   \right)
   &= 
   \left(  
   \part{
-  \left(\harp R\ij \cdot \harp u \ijj \right)}{\harp r\ijk}  
+  \left(\vec{R}\ij \cdot \vec{u} \ijj \right)}{\vec{r}\ijk}  
   \right)\otimes \uijj 
   + 
-  \harp R\ij \cdot \harp u \ijj
+  \vec{R}\ij \cdot \vec{u} \ijj
   \otimes
   \left(  
   \part{
-  ( \uijj  )}{\harp r\ijk}  
+  ( \uijj  )}{\vec{r}\ijk}  
   \right)
   \\
   &= 
@@ -367,11 +515,11 @@ And now the derivative for d$\rijjj$
   \right)
   \otimes \uijj 
   + 
-  \harp R\ij \cdot \harp u \ijj
+  \vec{R}\ij \cdot \vec{u} \ijj
   \otimes
   \left(  
   \part{
-  ( \uijj  )}{\harp r\ijk}  
+  ( \uijj  )}{\vec{r}\ijk}  
   \right)
 \end{align*}
 
@@ -380,18 +528,18 @@ And now the derivative for d$\rijjj$
 Now plugging in that definition into the derivative we're looking for.
 
 \begin{align*}
-  \part{\harp R\ij ^ \bot}{\harp r\ijk}  &=  
+  \part{\vec{R}\ij ^ \bot}{\vec{r}\ijk}  &=  
   -\left[
   \left(  
   \Rij \cdot  \part{\uijj}{\rijjj} 
   \right)
   \otimes \uijj 
   + 
-  \harp R\ij \cdot \harp u \ijj
+  \vec{R}\ij \cdot \vec{u} \ijj
   \otimes
   \left(  
   \part{
-  ( \uijj  )}{\harp r\ijk}  
+  ( \uijj  )}{\vec{r}\ijk}  
   \right)
   \right]
 \end{align*}
@@ -498,7 +646,7 @@ For the next three definitions, plug in the values that were previously calculat
 % \subsection{Part 3}
 
 % \begin{align*}
-%   \partbig{\magn{\harp R\ijj ^ \perp}^2}{\harp \ij} = 
+%   \partbig{\magn{\vec{R}\ijj ^ \perp}^2}{\vec{\}ij} = 
 % \end{align*}
 
 
