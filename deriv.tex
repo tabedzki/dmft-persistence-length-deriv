@@ -1,7 +1,7 @@
 \documentclass{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage[margin=1.0in]{geometry}
+\usepackage[margin=0.8in]{geometry}
 \usepackage{color}
 \usepackage{clipboard}
 \usepackage{amsmath,amssymb}
@@ -28,7 +28,7 @@
 
 \begin{document}
 \begin{center}
-  \textbf{Persistence length interactions and force Derviation.}\\
+  \textbf{Persistence length interactions and force Derivation.}\\
   \textsc{Christian Tabedzki}
 \end{center} 
 
@@ -65,7 +65,8 @@ which when discretized becomes
 \end{equation}
 where 
 \[
-\vec{R}\ij  ^\bot = \vec{R} \ij - \left(\vec{R} \ij \cdot \vec{u} \ijj \right) \vec{u} \ijj 
+\vec{R}\ij  ^\bot = \vec{R} \ij - \left(\vec{R} \ij \cdot \vec{u} \ijj \right)
+\vec{u} \ijj 
 \]
 which represents the component of \(\vec{R} \ij\) vector perpendicular to \(\vec{u} \ijj \).
 \(\vec{u} \ijj \) is defined as  
@@ -132,21 +133,15 @@ wil break up the energy term into three parts, but it will also be useful to hav
   \frac{\uijj \otimes \uijjj}{\magn{\rij - \rijjj}}\\
   &  =
   \Copy{dudij}
-  % \newcommand{\dudij}
   {
   \frac{\ten{\delta} - \uijj \otimes \uijjj}{\magn{\rij - \rijjj}}
   }
-  % dudij
-  % \Paste{dudij}
 \end{align*}
 
 
 \begin{align*}
-  \Paste{dudij}
   \part{\vec{u} \ijj }{\vec{r} \ijj} = 
   \Copy{dudijj}{ \ten{0}}
-  % \newcommand{\dudijj}{ \ten{0}}
-  % \dudijj
 \end{align*}
 
 \begin{align*}
@@ -174,33 +169,33 @@ wil break up the energy term into three parts, but it will also be useful to hav
 \end{align*}
 
 
-\subsubsection{Orientation derivatives (unique case)}
+% \subsubsection{Orientation derivatives (unique case)}
 
-\begin{align*}
-  \part{\vec{u}_{12}}{\vec{r}_{2}} 
-  &=
-  \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
-  {\vec{r}_{2}}
-  \\
-  &=
-  \frac{\ten{\delta}}
-  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
-  - 
-  \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
-  \otimes 
-  (\vec{r}_{2} - \vec{r}_{1} )
-  }
-  {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
-  & = 
-  \frac{
-  \ten{\delta}  
-  -
-  (\vec{r}_{2} - \vec{r}_{1} ) 
-  \otimes 
-  (\vec{r}_{2} - \vec{r}_{1} )
-  }
-  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
-\end{align*}
+% \begin{align*}
+%   \part{\vec{u}_{12}}{\vec{r}_{2}} 
+%   &=
+%   \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
+%   {\vec{r}_{2}}
+%   \\
+%   &=
+%   \frac{\ten{\delta}}
+%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+%   - 
+%   \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
+%   \otimes 
+%   (\vec{r}_{2} - \vec{r}_{1} )
+%   }
+%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
+%   & = 
+%   \frac{
+%   \ten{\delta}  
+%   -
+%   (\vec{r}_{2} - \vec{r}_{1} ) 
+%   \otimes 
+%   (\vec{r}_{2} - \vec{r}_{1} )
+%   }
+%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+% \end{align*}
 
 
 
@@ -263,30 +258,24 @@ wil break up the energy term into three parts, but it will also be useful to hav
   \right)
   +
   \part{\vec{R} \ij}{\vec{r} \ij} \cdot \vec{u}\ijj
-  % \vec{R}\ij \cdot \dudij + \part{\vec{R} \ij}{\vec{r} \ij} \cdot \vec{u}\ijj
   \\
   &= 
-  - \vec{R}\ij \cdot  \frac{(\rij - \vec{r}\ijjj)
-  \otimes
-  (\rij - \vec{r}\ijjj)}
-  {\magn{\vec{r} \ij - \vec{r}\ijk}^3}
+  \vec{R}\ij \cdot 
+  \left(
+  {
+  \frac{\ten{\delta} - \uijj \otimes \uijj}{\magn{\rij - \rijjj}}
+  }
+  \right)
   + \ten{\delta} \cdot \vec{u} \ijj 
-  + \Rij \cdot \frac{\ten{\delta}}{\magn{\rij - \rijjj}}
   \\
   &= 
-  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  +  \uijj
-  +  \frac{\Rij}{\magn{\rij - \rijjj}}
-  \\
-  &= 
-  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  +  \frac{\rij - \rijjj}{\magn{\rij - \rijjj}}
-  +  \frac{\Rij}{\magn{\rij - \rijjj}}
-  \\
-  &= 
-  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  +  \frac{\rij - \rijjj + \Rij}{\magn{\rij - \rijjj}}
-  % + \frac{\rij - \rijjj}{\magn{\rij - \rijjj } }
+  \left(
+  {
+  \frac{\Rij - (\Rij \cdot \uijj ) \times \uijj}{\magn{\rij - \rijjj}}
+  }
+  \right)
+  + 
+  \vec{u} \ijj 
 \end{align*}
 
 \begin{align*}
@@ -304,12 +293,14 @@ wil break up the energy term into three parts, but it will also be useful to hav
    \\
   &= 
   \left(
-  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  +  \uijj
-  +  \frac{\Rij}{\magn{\rij - \rijjj}}
+  \left(
+  {
+  \frac{\Rij - (\Rij \cdot \uijj ) \times \uijj}{\magn{\rij - \rijjj}}
+  }
+  \right)
+  + 
+  \vec{u} \ijj 
   \right) 
-  % -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  % +  \uijj
   \otimes \uijj
   \\
   &
@@ -323,38 +314,27 @@ wil break up the energy term into three parts, but it will also be useful to hav
   \frac{\ten{\delta} - \uijj \otimes \uijj}{\magn{\rij - \rijjj}}
   }
   \right)
+  \\
+  &=
+  \uijj \otimes \uijj
+  + 
+  \frac{\Rij \otimes \uijj}{\magn{\rij - \rijjj}} 
+  +
+  \frac{
+    \left( 
+      \Rij \cdot \uijj   
+    \right)
+    \ten{\delta}
+    }{\magn{\rij - \rijjj}}
+  -
+  \frac{
+    2 \left(
+      \Rij \cdot \uijj 
+    \right)
+    \left(\uijj \otimes \uijj 
+    \right)
+    }{\magn{\rij - \rijjj}}
 \end{align*}
-% \frac{\left( \vec{r}\ij-\vec{r}\ijk \right)}{\magn{\vec{r}\ij - \vec{r}\ijk}} 
-
-% \begin{align*}
-%   - \part{\left(\left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
-%   \vec{u} \ijj\right)
-%   }{\vec{r}\ij}
-%   % \left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes 
-%   % \vec{u} \ijj 
-%   &= 
-%   \part{\left(\vec{R}\ij \cdot \vec{u} \ijj \right)}{\vec{r}\ij} \otimes
-%   \uijj 
-%   +
-%   \left(\vec{R}\ij \cdot \vec{u} \ijj \right) \otimes
-%   \part{\uijj }{\vec{r}\ij} 
-%   \\
-%   &= 
-%   \left(\frac{\rijjj - \rijj }{\magn{\rijjj - \rijj}} 
-%   - (\Rij) \cdot \frac{\uijj \otimes \uijj}{\magn{\rij - \rijjj}}\right)
-%   \otimes \uijj 
-%   + \left(\Rij \cdot \uijj \right) \otimes \ten{0}
-%   \\
-%   &= 
-%   \left(\frac{\rijjj - \rijj }{\magn{\rijjj - \rijj}} 
-%   - (\Rij) \cdot \frac{\uijj \otimes \uijj}{\magn{\rij - \rijjj}}\right)
-%   \otimes \uijj 
-%   \\
-%   &= 
-%   \left(\rijjj - \rijj  
-%   - (\Rij) \cdot \uijj \otimes \uijj\right)
-%   \otimes \frac{\uijj }{\magn{\rij - \rijjj}}
-% \end{align*}
 
 Now plugging in that definition into the derivative we're looking for.
 
@@ -364,19 +344,27 @@ Now plugging in that definition into the derivative we're looking for.
   \vec{u} \ijj \right)
   }{\vec{r}\ij} \\
   &= 
+  \boxed{
   \ten{\delta} 
   -
   \left[
-  \left(
-  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  +  \uijj
-  +  \frac{\Rij}{\magn{\rij - \rijjj}}
-  \right) \otimes \uijj
-  +  
-  \left(\vec{R}\ij \cdot \vec{u} \ijj \right)
-  \otimes 
-  {\part{\vec{u} \ijj }{\vec{r}\ij} }
+  \uijj \otimes \uijj
+  + 
+  \frac{\Rij \otimes \uijj }{\magn{\rij - \rijjj}} 
+  +
+  \frac{ \left( 
+    \Rij \cdot \uijj
+    \right) \ten{\delta}}{\magn{\rij - \rijjj}}
+  -
+  \frac{
+    2 \left(
+      \Rij \cdot \uijj 
+    \right)
+    \left(\uijj \otimes \uijj 
+    \right)
+    }{\magn{\rij - \rijjj}}
   \right]
+  }
 \end{align*}
  
 %% End of the first derivative calculation. 
@@ -406,8 +394,12 @@ Now plugging in that definition into the derivative we're looking for.
   - \ten{\delta} \cdot \frac{\left( \rij - \rijjj \right)}{\magn{\rij - \rijjj}} 
   =
   - \ten{\delta} \cdot \uijj
+  \\
+  &
   =
+  \boxed{
   - \uijj
+  }
 \end{align*}
 
 \begin{align*}
@@ -459,18 +451,38 @@ Now plugging in that definition into the derivative we're looking for.
   \left( - \uijj \otimes \uijj \right)
   \\
   &= 
+  \boxed{
   \uijj \otimes \uijj 
   -
   \ten{\delta} 
-  % \left(\rijjj - \rijj  
-  % - (\Rij) \cdot \uijj \otimes \uijj\right)
-  % \otimes \frac{\uijj }{\magn{\rij - \rijjj}}
+  }
 \end{align*}
 
 
 \subsubsection{Calculating $\displaystyle\partbig{\Rij^\perp}{\rijjj}$}
 By symmetry, we can figure out the value by adding the two pervious derivations
-and putting a negative in front of it, but let's do the derivation anyway.
+and putting a negative in front of it. 
+\begin{equation}
+  \label{eqn:dRijPerpdrijjj}
+  \part{\vec{R}\ij ^ \bot}{\vec{r}\ijk}  =  
+  \left[
+  \frac{\Rij \otimes \uijj }{\magn{\rij - \rijjj}} 
+  +
+  \frac{ \left( 
+    \Rij \cdot \uijj
+    \right) \ten{\delta}}{\magn{\rij - \rijjj}}
+  -
+  \frac{
+    2 \left(
+      \Rij \cdot \uijj 
+    \right)
+    \left(\uijj \otimes \uijj 
+    \right)
+    }{\magn{\rij - \rijjj}}
+  \right]
+\end{equation}
+However, we should double check this above value but let's do the derivation
+anyway.
 % And now the derivative for d$\rijjj$
 
 \begin{align*}
@@ -543,33 +555,23 @@ and putting a negative in front of it, but let's do the derivation anyway.
   \frac{\uijj \otimes \uijj - \ten{\delta} }{\magn{\rij - \rijjj}}
   \right)
   }
-\end{align*}
-
-
-
-Now plugging in that definition into the derivative we're looking for.
-
-\begin{align*}
-  \part{\vec{R}\ij ^ \bot}{\vec{r}\ijk}  &=  
-  % -\left[
-  % \left(  
-  % \Rij \cdot  \part{\uijj}{\rijjj} 
-  % \right)
-  % \otimes \uijj 
-  % + 
-  % \vec{R}\ij \cdot \vec{u} \ijj
-  % \otimes
-  % \left(  
-  % \part{
-  % ( \uijj  )}{\vec{r}\ijk}  
-  % \right)
-  % \right]
-  -\left[
-  \Rij \cdot 
+  \\
+  &= 
+  \Copy{drijdrijjj_early}{
   \left(
-    \frac{\uijj \otimes \uijj - \ten{\delta}}{\magn{\rij - \rijjj}}
-  \right)
+    \frac{
+      \left(
+        \Rij\cdot \uijj 
+      \right)
+      \left[
+       \uijj 
+      \otimes \uijj 
+      \right]
+       - 
+  \Rij 
   \otimes \uijj 
+      }{\magn{\rij - \rijjj}}
+  \right)
   + 
   \left(
   \vec{R}\ij \cdot \vec{u} \ijj
@@ -579,8 +581,74 @@ Now plugging in that definition into the derivative we're looking for.
   \frac{\uijj \otimes \uijj - \ten{\delta} }{\magn{\rij - \rijjj}}
   \right)
   }
-  \right]
+  }
+  \\
+  &= 
+    \frac{
+  2
+      \left(
+        \Rij\cdot \uijj 
+      \right)
+      \left[
+       \uijj 
+      \otimes \uijj 
+      \right]
+      }{\magn{\rij - \rijjj}}
+       - 
+    \frac{
+  \Rij 
+  \otimes \uijj 
+      }{\magn{\rij - \rijjj}}
+  {
+    -
+  \frac{
+  \left(
+    \Rij 
+    \cdot 
+    \uijj 
+  \right)
+  \ten{\delta}
+    }{\magn{\rij - \rijjj}}
+  }
 \end{align*}
+
+
+Now plugging in that definition into the derivative we're looking for.
+
+\begin{align*}
+  \part{\vec{R}\ij ^ \bot}{\vec{r}\ijk}  &=  
+  \boxed{
+    \frac{
+      -
+  2
+      \left(
+        \Rij\cdot \uijj 
+      \right)
+      \left[
+       \uijj 
+      \otimes \uijj 
+      \right]
+      }{\magn{\rij - \rijjj}}
+       + 
+    \frac{
+  \Rij 
+  \otimes \uijj 
+      }{\magn{\rij - \rijjj}}
+  {
+    +
+  \frac{
+  \left(
+    \Rij 
+    \cdot 
+    \uijj 
+  \right)
+  \ten{\delta}
+    }{\magn{\rij - \rijjj}}
+  }
+  }
+\end{align*}
+which is the same answer that we got as from Eq \ref{eqn:dRijPerpdrijjj}, so our math is
+right.
 
 \subsection{Part 1 Derivation}
 
@@ -634,24 +702,28 @@ Now plugging in that definition into the derivative we're looking for.
   \ten{\delta} 
   -
   \left[
-  \left(
-  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  +  \uijj
-  +  \frac{\Rij}{\magn{\rij - \rijjj}}
-  \right) \otimes \uijj
-  \right.
-  \right. 
-  \right. 
-  \\
-  & 
-  \quad
-  \left. 
-  \left.
-  \left.
-  +  
-  \left(\vec{R}\ij \cdot \vec{u} \ijj \right)
-  \otimes 
-  {\part{\vec{u} \ijj }{\vec{r}\ij} }
+  \uijj \otimes \uijj
+  + 
+  \frac{\Rij \otimes \uijj }{\magn{\rij - \rijjj}} 
+  % \right. \right. 
+  % \right. 
+  % \\
+  % & 
+  % \quad 
+  % \left. \left. 
+  % \left. 
+  +
+  \frac{ \left( 
+    \Rij \cdot \uijj
+    \right) \ten{\delta}}{\magn{\rij - \rijjj}}
+  -
+  \frac{
+    2 \left(
+      \Rij \cdot \uijj 
+    \right)
+    \left(\uijj \otimes \uijj 
+    \right)
+    }{\magn{\rij - \rijjj}}
   \right]
   \right]
   \right)
@@ -668,7 +740,23 @@ Now plugging in that definition into the derivative we're looking for.
   \\
   &=
   2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
-  \part{\left(\uij - \eta \Rij^\perp\right)}{\rijj}
+  \part{\left(\uij - \eta \Rij^\perp\right)}{\rijj} 
+  \\
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  % \\
+  % & 
+  % \quad
+  \left(
+  \frac{\uijj \otimes \uijj - \ten{\delta} }{\magn{\rij - \rijjj}}
+  -
+  \eta 
+  \left\{
+  \uijj \otimes \uijj 
+  -
+  \ten{\delta} 
+  \right\}
+  \right)
 \end{align*}
 
 
@@ -731,11 +819,15 @@ Now plugging in that definition into the derivative we're looking for.
 \\
   &=
 2(\Rij \cdot \uijj - l_0\gamma)
+  \left[
   \left(
-  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  +  \uijj
-  +  \frac{\Rij}{\magn{\rij - \rijjj}}
-  \right) 
+  {
+  \frac{\Rij - (\Rij \cdot \uijj ) \times \uijj}{\magn{\rij - \rijjj}}
+  }
+  \right)
+  + 
+  \vec{u} \ijj 
+  \right] 
 \end{align*}
 
 \begin{align*}
@@ -746,7 +838,9 @@ Now plugging in that definition into the derivative we're looking for.
 \\
 & =
 2(\Rij \cdot \uijj - l_0\gamma)
-(- \uijj)
+\left[
+  - \uijj
+\right]
 \end{align*}
 
 \begin{align*}
@@ -759,11 +853,13 @@ Now plugging in that definition into the derivative we're looking for.
 & =
 2(\Rij \cdot \uijj - l_0\gamma)
 \times
+\left[
 \Rij 
 \cdot 
 \left(
   \frac{\uijj \otimes \uijj - \ten{\delta}}{\magn{\rij - \rijjj}}
 \right)
+\right]
 \end{align*}
 
 \subsection{Part 3 Derivation}
@@ -797,21 +893,27 @@ For the next three definitions, plug in the values that were previously calculat
   &
   \qquad
   \cdot 
-  \left[
+  \left\{
   \ten{\delta} 
   -
   \left[
-  \left(
-  -\frac{\vec{R} \ij}{\magn{\rij - \rijjj}} \cdot (\uijj \otimes \uijj ) 
-  +  \uijj
-  +  \frac{\Rij}{\magn{\rij - \rijjj}}
-  \right) \otimes \uijj
-  +  
-  \left(\vec{R}\ij \cdot \vec{u} \ijj \right)
-  \otimes 
-  {\part{\vec{u} \ijj }{\vec{r}\ij} }
+  \uijj \otimes \uijj
+  + 
+  \frac{\Rij \otimes \uijj }{\magn{\rij - \rijjj}} 
+  +
+  \frac{ \left( 
+    \Rij \cdot \uijj
+    \right) \ten{\delta}}{\magn{\rij - \rijjj}}
+  -
+  \frac{
+    2 \left(
+      \Rij \cdot \uijj 
+    \right)
+    \left(\uijj \otimes \uijj 
+    \right)
+    }{\magn{\rij - \rijjj}}
   \right]
-  \right]
+  \right\}
 \end{align*}
 
 
@@ -880,38 +982,37 @@ For the next three definitions, plug in the values that were previously calculat
   \left(\vec{R} \ij \cdot \vec{u} \ijj \right) 
   \vec{u} \ijj 
   \right)
-  \\
-  & 
-  \quad
   \cdot 
   \left\{
-  -\left[
-  \Rij \cdot 
-  \left(
-    \frac{\uijj \otimes \uijj - \ten{\delta}}{\magn{\rij - \rijjj}}
-  \right)
+    \frac{
+      -
+  2
+      \left(
+        \Rij\cdot \uijj 
+      \right)
+      \left[
+       \uijj 
+      \otimes \uijj 
+      \right]
+      }{\magn{\rij - \rijjj}}
+       + 
+    \frac{
+  \Rij 
   \otimes \uijj 
-  + 
-  \left(
-  \vec{R}\ij \cdot \vec{u} \ijj
-  \right)
+      }{\magn{\rij - \rijjj}}
   {
+    +
+  \frac{
   \left(
-  \frac{\uijj \otimes \uijj - \ten{\delta} }{\magn{\rij - \rijjj}}
+    \Rij 
+    \cdot 
+    \uijj 
   \right)
+  \ten{\delta}
+    }{\magn{\rij - \rijjj}}
   }
-  \right]
   \right\}
 \end{align*}
-% \subsection{Part 1}
-
-
-% \subsection{Part 3}
-
-% \begin{align*}
-%   \partbig{\magn{\vec{R}\ijj ^ \perp}^2}{\vec{\}ij} = 
-% \end{align*}
-
 
 
 
