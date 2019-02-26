@@ -33,7 +33,10 @@
 \end{center} 
 
 
-For this report, we derive the forces for each particle involved on the polymer backbone to.
+For this derivation, we derive the forces for each particle involved on the polymer
+backbone to. In this report, normal scalar multiplication is denoted either as
+$\times$ or by having the terms next to a vector or tensor, dyadic product
+is denoted as $\otimes$ and dot product, denoted as $\cdot$, is either the vector-vector dot product or the vector matrix multiplication.
 
 \section{Energies}
 
@@ -66,7 +69,9 @@ which when discretized becomes
 where 
 \[
 \vec{R}\ij  ^\bot = \vec{R} \ij - \left(\vec{R} \ij \cdot \vec{u} \ijj \right)
-\vec{u} \ijj 
+\vec{u} \ijj  = \Rij - \Rij \cdot \left(
+ \uijj \otimes \uijj  
+\right)
 \]
 which represents the component of \(\vec{R} \ij\) vector perpendicular to \(\vec{u} \ijj \).
 \(\vec{u} \ijj \) is defined as  
@@ -199,31 +204,31 @@ wil break up the energy term into three parts, but it will also be useful to hav
 
 
 
-\begin{align*}
-  \part{\vec{u}_{12}}{\vec{r}_{1}} 
-  &=
-  \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
-  {\vec{r}_{1}}
-  \\
-  &=
-  \frac{-\ten{\delta}}
-  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
-  + 
-  \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
-  \otimes 
-  (\vec{r}_{2} - \vec{r}_{1} )
-  }
-  {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
-  & = 
-  \frac{
-  (\vec{r}_{2} - \vec{r}_{1} ) 
-  \otimes 
-  (\vec{r}_{2} - \vec{r}_{1} )
-  -
-  \ten{\delta}  
-  }
-  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
-\end{align*}
+% \begin{align*}
+%   \part{\vec{u}_{12}}{\vec{r}_{1}} 
+%   &=
+%   \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
+%   {\vec{r}_{1}}
+%   \\
+%   &=
+%   \frac{-\ten{\delta}}
+%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+%   + 
+%   \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
+%   \otimes 
+%   (\vec{r}_{2} - \vec{r}_{1} )
+%   }
+%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
+%   & = 
+%   \frac{
+%   (\vec{r}_{2} - \vec{r}_{1} ) 
+%   \otimes 
+%   (\vec{r}_{2} - \vec{r}_{1} )
+%   -
+%   \ten{\delta}  
+%   }
+%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+% \end{align*}
 
  \subsubsection{Calculating $\displaystyle\partbig{\Rij^\perp}{\rij}$}
 
@@ -276,6 +281,13 @@ wil break up the energy term into three parts, but it will also be useful to hav
   \right)
   + 
   \vec{u} \ijj 
+  \\ 
+  &=
+  \frac{\Rij}{\magn{\rij - \rijjj}}
+  \left(
+   \ten{\delta} - \uijj \otimes \uijj 
+  \right)
+  + \uijj
 \end{align*}
 
 \begin{align*}
@@ -334,6 +346,16 @@ wil break up the energy term into three parts, but it will also be useful to hav
     \left(\uijj \otimes \uijj 
     \right)
     }{\magn{\rij - \rijjj}}
+    \\
+    & = 
+    \uijj \otimes \uijj
+     + 
+     \frac{1}{\magn{\rij - \rijjj}} 
+     \left(
+      \Rij \otimes \uijj + 
+      \left(\Rij \cdot \uijj \right)
+      \times (\ten{\delta} - 2 \uijj \otimes \uijj)
+     \right)
 \end{align*}
 
 Now plugging in that definition into the derivative we're looking for.
@@ -693,7 +715,7 @@ right.
   -
   2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
   \left(
-  \frac{\ten{\delta} - \uijj \otimes \uijjj}{\magn{\rij - \rijjj}}
+  \frac{\ten{\delta} - \uijj \otimes \uijj}{\magn{\rij - \rijjj}}
   + \right. \\
   & \quad 
   \left. 
@@ -778,7 +800,7 @@ right.
   \right)
   \\
   & =
-  2\left(\uij - \uijj - \eta \Rij^\perp\right) 
+  - 2\left(\uij - \uijj - \eta \Rij^\perp\right) 
   \cdot
   \left(
   \frac{\uijj \otimes \uijj - \ten{\delta} }{\magn{\rij - \rijjj}}
@@ -814,7 +836,7 @@ right.
   \part{\left(\Rij \cdot \uijj - l_0\gamma\right)^2}{\rij }
   &=
 2(\Rij \cdot \uijj - l_0\gamma)
-\cdot 
+\otimes
 \part{\left(\Rij \cdot \uijj\right)}{\rij}
 \\
   &=
@@ -873,6 +895,7 @@ For the next three definitions, plug in the values that were previously calculat
   2 \Rij^\perp \cdot \part{\Rij^\perp}{\rij} 
   \\
   &= 
+  2
   \left(
   \vec{R} \ij 
   - 
@@ -883,6 +906,7 @@ For the next three definitions, plug in the values that were previously calculat
   \part{\Rij^\perp}{\rij}
   \\
   &= 
+  2
   \left(
   \vec{R} \ij 
   - 
@@ -932,6 +956,7 @@ For the next three definitions, plug in the values that were previously calculat
   2 \Rij^\perp \cdot \part{\Rij^\perp}{\rijj}
   \\
   &= 
+  2
   \left(
   \vec{R} \ij 
   - 
@@ -942,6 +967,7 @@ For the next three definitions, plug in the values that were previously calculat
   \part{\Rij^\perp}{\rijj}
   \\
   &= 
+  2
   \left(
   \vec{R} \ij 
   - 
@@ -966,6 +992,7 @@ For the next three definitions, plug in the values that were previously calculat
   2 \Rij^\perp \cdot \part{\Rij^\perp}{\rijjj}
   \\
   &= 
+  2
   \left(
   \vec{R} \ij 
   - 
@@ -976,6 +1003,7 @@ For the next three definitions, plug in the values that were previously calculat
   \part{\Rij^\perp}{\rijjj}
   \\
   &= 
+  2
   \left(
   \vec{R} \ij 
   - 
