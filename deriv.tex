@@ -62,7 +62,7 @@ which when discretized becomes
   +
   \overbrace{
   \frac{\varepsilon _\perp}
-  {2l_0} \magn{\vec{R}\ijj ^\perp}^2
+  {2l_0} \magn{\vec{R}\ij ^\perp}^2
   }^{\text{shearing component}}
   \right]
 \end{equation}
@@ -114,7 +114,7 @@ wil break up the energy term into three parts, but it will also be useful to hav
    ^{\text{Part 2}}
    +
    \overbrace{\frac{\varepsilon _\perp}
-   {2l_0} \magn{\vec{R}\ijj ^\perp}^2} ^ {\text{Part 3}}
+   {2l_0} \magn{\vec{R}\ij ^\perp}^2} ^ {\text{Part 3}}
   \right]
 \end{equation}
 
@@ -135,11 +135,11 @@ wil break up the energy term into three parts, but it will also be useful to hav
   =
   \frac{\ten{\delta}}{\magn{\rij - \rijjj}} 
   -
-  \frac{\uijj \otimes \uijjj}{\magn{\rij - \rijjj}}\\
+  \frac{\uijj \otimes \uijj}{\magn{\rij - \rijjj}}\\
   &  =
   \Copy{dudij}
   {
-  \frac{\ten{\delta} - \uijj \otimes \uijjj}{\magn{\rij - \rijjj}}
+  \frac{\ten{\delta} - \uijj \otimes \uijj}{\magn{\rij - \rijjj}}
   }
 \end{align*}
 
@@ -174,61 +174,68 @@ wil break up the energy term into three parts, but it will also be useful to hav
 \end{align*}
 
 
-% \subsubsection{Orientation derivatives (unique case)}
+\subsubsection{Orientation derivatives (unique case)}
 
-% \begin{align*}
-%   \part{\vec{u}_{12}}{\vec{r}_{2}} 
-%   &=
-%   \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
-%   {\vec{r}_{2}}
-%   \\
-%   &=
-%   \frac{\ten{\delta}}
-%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
-%   - 
-%   \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
-%   \otimes 
-%   (\vec{r}_{2} - \vec{r}_{1} )
-%   }
-%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
-%   & = 
-%   \frac{
-%   \ten{\delta}  
-%   -
-%   (\vec{r}_{2} - \vec{r}_{1} ) 
-%   \otimes 
-%   (\vec{r}_{2} - \vec{r}_{1} )
-%   }
-%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
-% \end{align*}
+\begin{align*}
+  \part{\vec{u}_{12}}{\vec{r}_{2}} 
+  &=
+  \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
+  {\vec{r}_{2}}
+  \\
+  &=
+  \frac{\ten{\delta}}
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+  - 
+  \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
+  \otimes 
+  (\vec{r}_{2} - \vec{r}_{1} )
+  }
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
+  & = 
+  \frac{
+  \ten{\delta}  
+  -
+  (\vec{r}_{2} - \vec{r}_{1} ) 
+  \otimes 
+  (\vec{r}_{2} - \vec{r}_{1} )
+  }
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+\end{align*}
+
+
+The only difference that is going to occur is that instead of using the further
+most point, you shift the index so that the orientation is just $\Rij$ forward
+or backward. The change is trivial and can be found in the code. These unique
+cases are not derived in this report but the logic of the case given can be
+applied to these edge cases.
 
 
 
-% \begin{align*}
-%   \part{\vec{u}_{12}}{\vec{r}_{1}} 
-%   &=
-%   \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
-%   {\vec{r}_{1}}
-%   \\
-%   &=
-%   \frac{-\ten{\delta}}
-%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
-%   + 
-%   \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
-%   \otimes 
-%   (\vec{r}_{2} - \vec{r}_{1} )
-%   }
-%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
-%   & = 
-%   \frac{
-%   (\vec{r}_{2} - \vec{r}_{1} ) 
-%   \otimes 
-%   (\vec{r}_{2} - \vec{r}_{1} )
-%   -
-%   \ten{\delta}  
-%   }
-%   {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
-% \end{align*}
+\begin{align*}
+  \part{\vec{u}_{12}}{\vec{r}_{1}} 
+  &=
+  \partbig{\frac{\vec{r}_2 - \vec{r}_1}{\magn{\vec{r}_2 - \vec{r}_1}}}
+  {\vec{r}_{1}}
+  \\
+  &=
+  \frac{-\ten{\delta}}
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+  + 
+  \frac{(\vec{r}_{2} - \vec{r}_{1} ) 
+  \otimes 
+  (\vec{r}_{2} - \vec{r}_{1} )
+  }
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} \\
+  & = 
+  \frac{
+  (\vec{r}_{2} - \vec{r}_{1} ) 
+  \otimes 
+  (\vec{r}_{2} - \vec{r}_{1} )
+  -
+  \ten{\delta}  
+  }
+  {\magn{\vec{r}_{2} - \vec{r}_{1}}} 
+\end{align*}
 
  \subsubsection{Calculating $\displaystyle\partbig{\Rij^\perp}{\rij}$}
 
@@ -674,13 +681,44 @@ right.
 
 \subsection{Part 1 Derivation}
 
-\begin{align*}
+\begin{equation}
+  % \label{<label>}
   \magn{\uij - \uijj - \eta \Rij^\perp}^2 
-  &=
+  =
   \left(\uij - \uijj - \eta \Rij^\perp\right)
   \cdot 
   \left(\uij - \uijj - \eta \Rij^\perp\right)
+\end{equation}
+
+\begin{align*}
+  \part{\magn{\uij - \uijj - \eta \Rij^\perp}^2 }{
+    \vec{r} _{i,j+1}
+  }
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  \part{\left(\uij - \uijj - \eta \Rij^\perp\right)}{
+    \vec{r} _{i,j+1}
+  }
   \\
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  \part{\left(\uij \right)}{
+    \vec{r} _{i,j+1}
+  }
+  \\
+  &=
+  2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
+  % \\
+  % & 
+  % \quad
+  \left(
+  \frac{\ten{\delta} - \uij \otimes \uij }{\magn{
+    \vec{r} _{i,j+1}
+    - \rijj}}
+  \right)
+\end{align*}
+
+\begin{align*}
   \part{\magn{\uij - \uijj - \eta \Rij^\perp}^2 }{
     \rij 
   }
@@ -690,15 +728,13 @@ right.
   \\
   &=
   2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
-  \part{\left(- \uijj - \eta \Rij^\perp\right)}{\rij}
+  \part{\left(- \uijj \right)}{\rij}
   \\
   &=
   -
   2\left(\uij - \uijj - \eta \Rij^\perp\right) \cdot
   \left(
   \part{\left(\uijj \right)}{\rij}
-  +
-  \part{\left( \eta \Rij^\perp\right)}{\rij}
   \right)
   \\
   &=
@@ -770,7 +806,7 @@ right.
   % & 
   % \quad
   \left(
-  \frac{\uijj \otimes \uijj - \ten{\delta} }{\magn{\rij - \rijjj}}
+  \frac{\uij \otimes \uij - \ten{\delta} }{\magn{\rij - \rijjj}}
   -
   \eta 
   \left\{
@@ -1041,6 +1077,13 @@ For the next three definitions, plug in the values that were previously calculat
   }
   \right\}
 \end{align*}
+
+
+In this report, I have gone and expanded out the terms. In the code, I use the
+condensed version, meaning \(  \part{\Rij^\perp}{\rijjj}\) is calculated once
+before all the updates and energy calculations and then that value is used
+throughout. This is done to ensure that there are less calculations and hence
+less possibilities for error.
 
 
 
